@@ -3,9 +3,9 @@ from bs4 import BeautifulSoup
 import smtplib
 import time
 
-URL = input('Incolla quì il link del prodotto amazon (Ctrl + V): ')
-price_user = input('Inserisci il prezzo sotto cui deve scendere il prodotto (Es. 250.0): ')
-receiver = input('Inserisci quì il tuo indirizzo email per ricevere gli aggiornamenti sul prezzo: ')
+URL = input('Paste the amazon product link here (Ctrl + V): ')
+price_user = input('Enter the price below which the product should drop (Ex. 250.0): ')
+receiver = input('Enter your email address here to receive price updates: ')
 
 headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36'}
 
@@ -33,23 +33,23 @@ def send_email():
     server.starttls()
     server.ehlo()
 
-    server.login('username', 'password')                            #you have to generate app password google, then insert username and app password google
+    server.login('username', 'password')                            #you have to generate app password google, then insert gmail and app password google
 
-    subject = 'Il prezzo del prodotto che cerchi è sceso!!!'
-    body = "Controlla il link Amazon: ", URL
+    subject = 'The price of the product you are looking for has gone down!!!'
+    body = "Check the amazon link: ", URL
 
     msg = f"Subject: {subject}\n\n{body}"
 
     server.sendmail(
-        'catchprice@gmail.com',
+        '', #insert gmail to send the update
         'receiver',
         msg
     )
 
-    print('La tua email è appena stata inviata')
+    print('Your email has just been sent!')
 
     server.quit()
 
 while(True):
     check_price()
-    time.sleep(180)
+    time.sleep(3600)
